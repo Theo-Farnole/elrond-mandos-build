@@ -1,4 +1,12 @@
-# Todo  
+# Elrond Mandos Builder
+
+Write Mandos test easier with Elrond Mandos Builder.
+
+Try it here : https://elrond-mandos-builder.onrender.com/
+
+![Example](/assets/usage-flow.gif)
+
+### Todo  
 - [X] Scenario name+comment
 - [X] Loading system
 - [X] delete step
