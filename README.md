@@ -1,5 +1,5 @@
 # Todo  
-- [ ] Scenario name+comment
+- [X] Scenario name+comment
 - [ ] Loading system
 - [ ] setState
 - [ ] checkState

@@ -1,62 +1,23 @@
 import React from 'react';
 import './App.css';
-import { Form, Button } from 'react-bootstrap';
-import IStep from '../types/IStep';
-import StepForm from '../components/StepForm';
+import { Button } from 'react-bootstrap';
+import Scenario from '../types/Scenario';
+import ScenarioForm from '../components/ScenarioForm';
 import { defaultStep } from '../const';
 
 function App() {
 
-  const [steps, setSteps] = React.useState<IStep[]>([
-    defaultStep
-  ]);
-  const [scenarioName, setScenarioName] = React.useState<string>("Scenario Name");
-  const [scenarioComment, setScenarioComment] = React.useState<string>("");
+
+  const [scenario, setScenario] = React.useState<Scenario>(new Scenario("Scenario Name", "", [defaultStep]));
+  // Trust me, I really dislike those forceUpdate; but I don't know how to do it better. If you have any ideas, please let me know.
+  const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
 
   return (
     <div className="App">
       <div className='panel-container'>
 
         <div className="panel-child panel-left">
-
-
-          <h3 className="mb-3">
-            Scenario
-          </h3>
-          <Button variant="secondary" className="w-100 mb-5" onClick={download}>Load</Button>
-
-          <h3 className="mb-3">
-            Scenario info
-          </h3>
-
-          <Form className="step-form">
-            <Form.Group>
-              <Form.Group>
-                <Form.Label>
-                  Scenario Name
-                </Form.Label>
-                <Form.Control type="text" value={scenarioName} onChange={(e) => setScenarioName(e.target.value)} />
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label>
-                  Scenario Comment
-                </Form.Label>
-                <Form.Control type="text" value={scenarioComment} onChange={(e) => setScenarioComment(e.target.value)} />
-              </Form.Group>
-            </Form.Group>
-          </Form>
-
-          <h3 className="mb-3">
-            Steps
-          </h3>
-          {steps.map((step, index) => {
-            return <StepForm step={step} key={index} />;
-          })}
-
-          <Button className="w-100" variant="light" onClick={addStep}>
-            +
-          </Button>
+          <ScenarioForm scenario={scenario} onUpdate={(s) => { setScenario(s); forceUpdate() }} />
         </div>
 
         <div className="panel-child panel-right">
@@ -66,7 +27,6 @@ function App() {
           </h3>
 
           <div >
-
             <Button variant="success" className="w-100 mb-5" onClick={download}>Download</Button>
 
             <pre className="code-snippet">
@@ -79,14 +39,11 @@ function App() {
     </div>
   );
 
-  function addStep() {
-    setSteps([...steps, defaultStep]);
-  }
 
   function download() {
     // download the json file
     const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(toJson())], { type: 'text/plain' });
+    const file = new Blob([toStringifiedJson()], { type: 'text/plain' });
 
     element.href = URL.createObjectURL(file);
     element.download = "step.json";
@@ -94,16 +51,11 @@ function App() {
     element.click();
   }
 
-  function toJson() {
-    return {
-      name: scenarioName,
-      comment: scenarioComment,
-      steps: steps.map(step => step.toJson())
-    };
-  }
-
   function toStringifiedJson() {
-    return JSON.stringify(toJson(), null, 4)
+
+    if (!scenario) throw new Error("Scenario is undefined");
+
+    return JSON.stringify(scenario.toJson(), null, 4)
   }
 }
 

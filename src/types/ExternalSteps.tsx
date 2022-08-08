@@ -8,8 +8,16 @@ export default class ExternalStep implements IStep {
         public path: string
     ) { }
 
-    getForm(onChange: () => void): JSX.Element | JSX.Element[] {
-        return <StepForm step={this} onChange={onChange} />
+    getForm(onUpdate: (step: IStep) => void): JSX.Element | JSX.Element[] {
+
+        return <>
+            <Form.Group>
+                <Form.Label>
+                    Path
+                </Form.Label>
+                <Form.Control type="text" value={this.path} onChange={(e) => { this.path = e.target.value; onUpdate(this) }} />
+            </Form.Group>
+        </>;
     }
 
     getName() {
@@ -23,21 +31,4 @@ export default class ExternalStep implements IStep {
         };
     }
 
-}
-
-interface Props {
-    step: ExternalStep;
-    onChange: () => void;
-}
-
-const StepForm = ({ step, onChange }: Props) => {
-
-    return <>
-        <Form.Group>
-            <Form.Label>
-                Path
-            </Form.Label>
-            <Form.Control type="text" value={step.path} onChange={(e) => { step.path = e.target.value; onChange() }} />
-        </Form.Group>
-    </>;
 }

@@ -5,13 +5,11 @@ import IStep from "../types/IStep";
 import "./StepForm.css"
 
 interface IProps {
-    step: IStep
+    step: IStep,
+    onUpdate: (step: IStep) => void
 }
 
-const StepForm = ({ step }: IProps) => {
-
-    const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
-
+const StepForm = ({ step, onUpdate }: IProps) => {
     return <Form className="step-form">
         <Form.Group>
             <Form.Label>
@@ -26,7 +24,7 @@ const StepForm = ({ step }: IProps) => {
                 })}
             </Form.Select>
 
-            {step.getForm(() => { forceUpdate() })}
+            {step.getForm(onUpdate)}
         </Form.Group>
     </Form>
 
