@@ -6,13 +6,23 @@ export class Account {
         public address: string,
         public nonce: number,
         public balance: string,
-        public username?: string,
-        public esdt?: (CompactEsdt | FullEsdt)[],
-        public comment?: string
+        public storage: { [key: string]: string } = {},
+        public code: string = "",
+        public username: string = "",
+        public comment: string = "",
+        public esdt: (CompactEsdt | FullEsdt)[] = [],
     ) { }
 
-    toJson(): string {
-        throw new Error("Method not implemented.");
+    toJson() {
+        return {
+            comment: this.comment ?? "",
+            nonce: this.nonce,
+            balance: this.balance,
+            "esdt": {},
+            username: this.username ?? "",
+            storage: this.storage,
+            code: this.code,
+        };
     }
 
     public static getDefault(): Account {

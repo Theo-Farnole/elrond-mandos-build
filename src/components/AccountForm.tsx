@@ -9,8 +9,6 @@ interface IProps {
 
 const AccountForm = ({ account, onUpdate }: IProps) => {
 
-    account = Object.assign({}, account);
-
     return <>
         <Form.Group>
             <Form.Label>

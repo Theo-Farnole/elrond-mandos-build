@@ -1,6 +1,5 @@
 import React from "react";
 import { Form } from "react-bootstrap";
-import AccountForm from "../../components/AccountForm";
 import AccountsForm from "../../components/AccountsForm";
 import { Account } from "../Account";
 import IStep from "./IStep";
@@ -10,8 +9,8 @@ export default class SetState implements IStep {
     private static readonly ID = "setState";
 
     constructor(
-        public comment?: string,
-        public accounts?: Account[],
+        public comment: string = "",
+        public accounts: Account[] = [],
     ) { }
 
 
@@ -32,16 +31,25 @@ export default class SetState implements IStep {
                     } />
             </Form.Group>
 
-            <AccountsForm accounts={this.accounts ?? []} onUpdate={(newAccounts) => {
+            <AccountsForm accounts={this.accounts} onUpdate={(newAccounts) => {
                 this.accounts = newAccounts;
                 onUpdate(this);
             }} />
         </>;
     }
 
+
     toJson(): any {
+        let accountsJson = {} as any;
+
+        this.accounts.forEach((account, index) => {
+            accountsJson[account.address] = account.toJson();
+        });
+
+
         return {
-            step: SetState.ID
+            step: SetState.ID,
+            accounts: accountsJson,
         };
     }
 }
