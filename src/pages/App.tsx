@@ -36,17 +36,17 @@ function App() {
             JSON output
           </h3>
 
-          {/* <JSONTree data={toJson()} /> */}
-          <div className="code-snippet">
+          <div >
 
-            <pre>
+            <Button variant="success" className="w-100 mb-3" onClick={download}>Download</Button>
+
+            <pre className="code-snippet">
               {toStringifiedJson()}
             </pre>
           </div>
         </div>
       </div>
 
-      <Button variant="success" id="download" onClick={download}>Download</Button>
     </div>
   );
 
