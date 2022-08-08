@@ -1,5 +1,7 @@
 # Elrond Mandos Builder
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Write mandos tests faster and easier with Elrond Mandos Builder.
 
 Try it here : https://elrond-mandos-builder.onrender.com/
@@ -11,9 +13,8 @@ Try it here : https://elrond-mandos-builder.onrender.com/
 - [X] Loading system
 - [X] delete step
 
-- [ ] Fill readme with screens and render.com link
-- [ ] add credit
-- [ ] add MIT license
+- [X] Fill readme with screens and render.com link
+- [X] add MIT license
 
 - [ ] Steps:
     - [ ] setState
