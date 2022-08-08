@@ -11,8 +11,6 @@ function App() {
     defaultStep
   ]);
 
-  console.log(toStringifiedJson());
-
   return (
     <div className="App">
       <div className='panel-container'>
@@ -27,7 +25,7 @@ function App() {
             return <StepForm step={step} key={index} />;
           })}
 
-          <Button className="w-100 mt-5" variant="light" onClick={addStep}>
+          <Button className="w-100" variant="light" onClick={addStep}>
             +
           </Button>
         </div>

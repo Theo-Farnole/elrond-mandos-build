@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { selectablesSteps } from "../const";
 import IStep from "../types/IStep";
+import "./StepForm.css"
 
 interface IProps {
     step: IStep
@@ -11,7 +12,7 @@ const StepForm = ({ step }: IProps) => {
 
     const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
 
-    return <Form>
+    return <Form className="step-form">
         <Form.Group>
             <Form.Label>
                 Step

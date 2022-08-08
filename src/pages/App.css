@@ -1,7 +1,7 @@
 .App {
   min-height: 100vh;
   color: white;
-  background-color: #282c34;
+  background-color: #1f1f1f;
 }
 
 /* .panel {
@@ -29,17 +29,12 @@
 #download {
   margin: 20px;
   width: calc(100% - 40px);
-  /* ancohr to bottom */
-  position: absolute;
-  bottom: 0;
-  left: 0;
 }
 
 .code-snippet {
   padding: 20px;
-  background-color: #1d1e22;
-  color: #9a8297;
-  height: 100%;
+  background-color: #282828;
+  color: white;
   border-radius: 0.375rem;
   font-family: var(--bs-font-monospace);
 }
