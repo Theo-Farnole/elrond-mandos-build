@@ -1,6 +1,7 @@
 # Todo  
 - [X] Scenario name+comment
 - [ ] Loading system
+- [ ] delete a state
 - [ ] setState
 - [ ] checkState
 - [ ] dumpState
@@ -12,3 +13,4 @@
 - [ ] make a standalone
 - [ ] validatorReward
 - [ ] add credit
+- [ ] add MIT license

@@ -4,9 +4,15 @@ import { Form } from "react-bootstrap";
 
 export default class ExternalStep implements IStep {
 
+    public static readonly ID = "externalSteps";
+
     constructor(
         public path: string
     ) { }
+
+    public static load(json: any): ExternalStep {
+        return new ExternalStep(json.path);
+    }
 
     getForm(onUpdate: (step: IStep) => void): JSX.Element | JSX.Element[] {
 
@@ -26,7 +32,7 @@ export default class ExternalStep implements IStep {
 
     toJson(): any {
         return {
-            "step": "externalSteps",
+            "step": ExternalStep.ID,
             "path": this.path
         };
     }

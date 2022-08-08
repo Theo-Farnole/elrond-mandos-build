@@ -3,14 +3,13 @@ import './App.css';
 import { Button } from 'react-bootstrap';
 import Scenario from '../types/Scenario';
 import ScenarioForm from '../components/ScenarioForm';
-import { defaultStep } from '../const';
 
 function App() {
 
-
-  const [scenario, setScenario] = React.useState<Scenario>(new Scenario("Scenario Name", "", [defaultStep]));
   // Trust me, I really dislike those forceUpdate; but I don't know how to do it better. If you have any ideas, please let me know.
   const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
+
+  const [scenario, setScenario] = React.useState<Scenario>(new Scenario("Scenario Name", "", []));
 
   return (
     <div className="App">
