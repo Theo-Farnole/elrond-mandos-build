@@ -1,19 +1,29 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { selectablesSteps } from "../const";
 import IStep from "../types/IStep";
 import "./StepForm.css"
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface IProps {
     step: IStep,
-    onUpdate: (step: IStep) => void
+    onUpdate: (step: IStep) => void,
+    onDelete: () => void
 }
 
-const StepForm = ({ step, onUpdate }: IProps) => {
+const StepForm = ({ step, onUpdate, onDelete }: IProps) => {
     return <Form className="step-form">
+
+
+
         <Form.Group>
-            <Form.Label>
+            <Form.Label className="d-flex justify-content-between align-items-center" >
                 Step
+
+                <Button variant="danger" onClick={onDelete}>
+                    <FontAwesomeIcon icon={faTrash} />
+                </Button>
             </Form.Label>
 
             <Form.Select onSelect={onSelect}>
@@ -23,6 +33,8 @@ const StepForm = ({ step, onUpdate }: IProps) => {
                     )
                 })}
             </Form.Select>
+
+
 
             {step.getForm(onUpdate)}
         </Form.Group>

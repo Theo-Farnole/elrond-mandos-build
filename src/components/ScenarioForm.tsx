@@ -50,7 +50,12 @@ const ScenarioForm = ({
         </h3>
         {
             scenario.steps.map((step, index) => {
-                return <StepForm step={step} key={index} onUpdate={(step) => { scenario.steps[index] = step; onUpdate(scenario) }} />;
+                return <StepForm
+                    step={step}
+                    key={index}
+                    onUpdate={(step) => { scenario.steps[index] = step; onUpdate(scenario) }}
+                    onDelete={() => { scenario.steps.splice(index, 1); onUpdate(scenario) }}
+                />;
             })
         }
 

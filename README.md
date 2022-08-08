@@ -1,7 +1,7 @@
 # Todo  
 - [X] Scenario name+comment
 - [X] Loading system
-- [ ] delete a state
+- [X] delete step
 - [ ] setState
 - [ ] checkState
 - [ ] dumpState
