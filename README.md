@@ -1,6 +1,6 @@
 # Todo  
 - [X] Scenario name+comment
-- [ ] Loading system
+- [X] Loading system
 - [ ] delete a state
 - [ ] setState
 - [ ] checkState
