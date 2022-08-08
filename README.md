@@ -11,3 +11,4 @@
 - [ ] Fill readme with screens and render.com link
 - [ ] make a standalone
 - [ ] validatorReward
+- [ ] add credit
