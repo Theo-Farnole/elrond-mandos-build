@@ -10,8 +10,6 @@
 
 .panel-child {
   padding: 30px;
-
-  border-bottom: rgb(57, 70, 78) 1px solid;
   border-radius: 3px;
 }  
 
@@ -23,7 +21,7 @@
 .panel-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  min-height: calc(100vh - 100px);
+  min-height: 100vh;
 }
 
 .code-snippet {

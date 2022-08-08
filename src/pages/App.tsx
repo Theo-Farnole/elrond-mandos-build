@@ -21,6 +21,8 @@ function App() {
             Steps
           </h3>
 
+          <Button variant="secondary" className="w-100 mb-5" onClick={download}>Load</Button>
+
           {steps.map((step, index) => {
             return <StepForm step={step} key={index} />;
           })}
@@ -38,7 +40,7 @@ function App() {
 
           <div >
 
-            <Button variant="success" className="w-100 mb-3" onClick={download}>Download</Button>
+            <Button variant="success" className="w-100 mb-5" onClick={download}>Download</Button>
 
             <pre className="code-snippet">
               {toStringifiedJson()}
