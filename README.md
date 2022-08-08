@@ -1,6 +1,6 @@
 # Elrond Mandos Builder
 
-Write Mandos test easier with Elrond Mandos Builder.
+Write mandos tests faster and easier with Elrond Mandos Builder.
 
 Try it here : https://elrond-mandos-builder.onrender.com/
 
