@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import IStep from '../types/IStep';
 import StepForm from '../components/StepForm';
 import { defaultStep } from '../const';
@@ -10,6 +10,8 @@ function App() {
   const [steps, setSteps] = React.useState<IStep[]>([
     defaultStep
   ]);
+  const [scenarioName, setScenarioName] = React.useState<string>("Scenario Name");
+  const [scenarioComment, setScenarioComment] = React.useState<string>("");
 
   return (
     <div className="App">
@@ -17,12 +19,37 @@ function App() {
 
         <div className="panel-child panel-left">
 
+
+          <h3 className="mb-3">
+            Scenario
+          </h3>
+          <Button variant="secondary" className="w-100 mb-5" onClick={download}>Load</Button>
+
+          <h3 className="mb-3">
+            Scenario info
+          </h3>
+
+          <Form className="step-form">
+            <Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  Scenario Name
+                </Form.Label>
+                <Form.Control type="text" value={scenarioName} onChange={(e) => setScenarioName(e.target.value)} />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>
+                  Scenario Comment
+                </Form.Label>
+                <Form.Control type="text" value={scenarioComment} onChange={(e) => setScenarioComment(e.target.value)} />
+              </Form.Group>
+            </Form.Group>
+          </Form>
+
           <h3 className="mb-3">
             Steps
           </h3>
-
-          <Button variant="secondary" className="w-100 mb-5" onClick={download}>Load</Button>
-
           {steps.map((step, index) => {
             return <StepForm step={step} key={index} />;
           })}
@@ -69,7 +96,8 @@ function App() {
 
   function toJson() {
     return {
-      name: "Step name",
+      name: scenarioName,
+      comment: scenarioComment,
       steps: steps.map(step => step.toJson())
     };
   }
