@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Form } from "react-bootstrap";
 import { defaultStep } from "../const";
-import Scenario from "../types/Scenario";
+import Scenario from "../types/steps/Scenario";
 import StepForm from "./StepForm";
 import "./ScenarioForm.css"
 

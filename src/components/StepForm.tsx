@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { selectablesSteps } from "../const";
-import IStep from "../types/IStep";
+import IStep from "../types/steps/IStep";
 import "./StepForm.css"
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +14,6 @@ interface IProps {
 
 const StepForm = ({ step, onUpdate, onDelete }: IProps) => {
     return <Form className="step-form">
-
-
-
         <Form.Group>
             <Form.Label className="d-flex justify-content-between align-items-center" >
                 Step
@@ -26,7 +23,7 @@ const StepForm = ({ step, onUpdate, onDelete }: IProps) => {
                 </Button>
             </Form.Label>
 
-            <Form.Select onSelect={onSelect}>
+            <Form.Select onChange={onSelect}>
                 {selectablesSteps.map((s) => {
                     return (
                         <option value={s.getName()} key={s.getName()}>{s.getName()}</option>
@@ -34,15 +31,12 @@ const StepForm = ({ step, onUpdate, onDelete }: IProps) => {
                 })}
             </Form.Select>
 
-
-
             {step.getForm(onUpdate)}
         </Form.Group>
     </Form>
 
     function onSelect(e: any) {
-        throw new Error("Not implemented");
-        // setSelectedStep(e.target.value);
+        onUpdate(selectablesSteps.find(s => s.getName() === e.target.value)!)
     }
 };
 

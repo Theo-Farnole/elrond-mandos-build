@@ -1,4 +1,4 @@
-import { stepsLoader } from "../const";
+import { stepsLoader } from "../../const";
 import IStep from "./IStep";
 
 export default class Scenario {

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Button } from 'react-bootstrap';
-import Scenario from '../types/Scenario';
 import ScenarioForm from '../components/ScenarioForm';
+import Scenario from '../types/steps/Scenario';
 
 
 
@@ -13,10 +13,6 @@ function App() {
   const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
 
   const [scenario, setScenario] = React.useState<Scenario>(new Scenario("Scenario Name", "", []));
-
-
-
-
 
   return (
     <div className="App">
