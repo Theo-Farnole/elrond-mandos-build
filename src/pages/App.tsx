@@ -1,48 +1,50 @@
 import React from 'react';
 import './App.css';
-import { Button, Form } from 'react-bootstrap';
-import ExternalStep from '../types/ExternalSteps';
+import { Button } from 'react-bootstrap';
 import IStep from '../types/IStep';
-import { JSONTree } from 'react-json-tree';
+import StepForm from '../components/StepForm';
+import { defaultStep } from '../const';
 
 function App() {
 
+  const [steps, setSteps] = React.useState<IStep[]>([
+    defaultStep
+  ]);
 
-  const selectablesSteps: IStep[] = [
-    new ExternalStep(""),
-  ];
-
-  const [selectedStep, setSelectedStep] = React.useState<IStep>(selectablesSteps[0]);
-  const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
+  console.log(toStringifiedJson());
 
   return (
     <div className="App">
-      <div className='panel'>
+      <div className='panel-container'>
 
         <div className="panel-child panel-left">
 
-          <Form>
-            <Form.Group>
-              <Form.Label>
-                Step
-              </Form.Label>
+          <h3 className="mb-3">
+            Steps
+          </h3>
 
-              <Form.Select onSelect={onSelect} >
-                {selectablesSteps.map((step) => {
-                  return (
-                    <option value={step.getName()} key={step.getName()}>{step.getName()}</option>
-                  )
-                })}
-              </Form.Select>
+          {steps.map((step, index) => {
+            return <StepForm step={step} key={index} />;
+          })}
 
-              {selectedStep.getForm(() => { forceUpdate() })}
-            </Form.Group>
-          </Form>
+          <Button className="w-100 mt-5" variant="light" onClick={addStep}>
+            +
+          </Button>
         </div>
 
         <div className="panel-child panel-right">
-          <JSONTree data={selectedStep.toJson()} />
 
+          <h3 className="mb-3">
+            JSON output
+          </h3>
+
+          {/* <JSONTree data={toJson()} /> */}
+          <div className="code-snippet">
+
+            <pre>
+              {toStringifiedJson()}
+            </pre>
+          </div>
         </div>
       </div>
 
@@ -50,10 +52,14 @@ function App() {
     </div>
   );
 
+  function addStep() {
+    setSteps([...steps, defaultStep]);
+  }
+
   function download() {
     // download the json file
     const element = document.createElement("a");
-    const file = new Blob([JSON.stringify(selectedStep.toJson())], { type: 'text/plain' });
+    const file = new Blob([JSON.stringify(toJson())], { type: 'text/plain' });
 
     element.href = URL.createObjectURL(file);
     element.download = "step.json";
@@ -61,10 +67,16 @@ function App() {
     element.click();
   }
 
+  function toJson() {
+    return {
+      name: "Step name",
+      steps: steps.map(step => step.toJson())
+    };
+  }
 
-  function onSelect(e: any) {
-    setSelectedStep(e.target.value);
+  function toStringifiedJson() {
+    return JSON.stringify(toJson(), null, 4)
   }
 }
 
-export default App;
+export default App;;
