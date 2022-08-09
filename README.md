@@ -4,7 +4,7 @@
 
 Write mandos tests faster and easier with Elrond Mandos Builder.
 
-Try it here : https://elrond-mandos-builder.onrender.com/
+Try it here: https://elrond-mandos-builder.onrender.com/
 
 ![Example](/assets/usage-flow.gif)
 

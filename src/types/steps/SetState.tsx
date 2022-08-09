@@ -1,18 +1,30 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import AccountsForm from "../../components/AccountsForm";
+import BlockInfoForm from "../../components/BlockInfoForm";
 import { Account } from "../Account";
+import { BlockInfo } from "../BlockInfo";
 import IStep from "./IStep";
+
+interface INewAddress {
+    creatorAddress: string;
+    creatorNonce: number;
+    newAddress: string;
+}
 
 export default class SetState implements IStep {
 
     private static readonly ID = "setState";
 
+
+
     constructor(
         public comment: string = "",
         public accounts: Account[] = [],
+        public newAddresses: INewAddress[] = [],
+        public previousBlockInfo: BlockInfo = { blockTimestamp: 0, blockNonce: 0, blockRound: 0, blockEpoch: 0 },
+        public currentBlockInfo: BlockInfo = { blockTimestamp: 0, blockNonce: 0, blockRound: 0, blockEpoch: 0 },
     ) { }
-
 
     getName(): string {
         return "Set State";
@@ -35,6 +47,19 @@ export default class SetState implements IStep {
                 this.accounts = newAccounts;
                 onUpdate(this);
             }} />
+
+            <BlockInfoForm blockInfo={this.previousBlockInfo} onUpdate={(newBlockInfo) => {
+                this.previousBlockInfo = newBlockInfo;
+                onUpdate(this);
+            }} groupLabelName="Previous Block Info" />
+
+            <BlockInfoForm blockInfo={this.currentBlockInfo} onUpdate={(newBlockInfo) => {
+                this.currentBlockInfo = newBlockInfo;
+                onUpdate(this);
+            }} groupLabelName="Current Block Info" />
+
+
+            TODO: Add new addresses < br />
         </>;
     }
 
@@ -46,11 +71,20 @@ export default class SetState implements IStep {
             accountsJson[account.address] = account.toJson();
         });
 
-
-        return {
+        let output = {
             step: SetState.ID,
             accounts: accountsJson,
-        };
+            newAddresses: this.newAddresses,
+        } as any;
+
+        if (this.previousBlockInfo.blockTimestamp !== 0 || this.previousBlockInfo.blockNonce !== 0 || this.previousBlockInfo.blockRound !== 0 || this.previousBlockInfo.blockEpoch !== 0) {
+            output.previousBlockInfo = this.previousBlockInfo;
+        }
+
+        if (this.currentBlockInfo.blockTimestamp !== 0 || this.currentBlockInfo.blockNonce !== 0 || this.currentBlockInfo.blockRound !== 0 || this.currentBlockInfo.blockEpoch !== 0) {
+            output.currentBlockInfo = this.currentBlockInfo;
+        }
+
+        return output;
     }
 }
-
