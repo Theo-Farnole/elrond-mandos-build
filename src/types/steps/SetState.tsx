@@ -2,21 +2,16 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import AccountsForm from "../../components/AccountsForm";
 import BlockInfoForm from "../../components/BlockInfoForm";
+import NewAddresses from "../../components/NewAddressesForm";
 import { Account } from "../Account";
 import { BlockInfo } from "../BlockInfo";
+import { INewAddress } from "../INewAddress";
 import IStep from "./IStep";
-
-interface INewAddress {
-    creatorAddress: string;
-    creatorNonce: number;
-    newAddress: string;
-}
 
 export default class SetState implements IStep {
 
+    // TODO: SetState loader
     private static readonly ID = "setState";
-
-
 
     constructor(
         public comment: string = "",
@@ -58,8 +53,10 @@ export default class SetState implements IStep {
                 onUpdate(this);
             }} groupLabelName="Current Block Info" />
 
-
-            TODO: Add new addresses < br />
+            <NewAddresses newAddresses={this.newAddresses} onUpdate={(newAddresses) => {
+                this.newAddresses = newAddresses;
+                onUpdate(this);
+            }} />
         </>;
     }
 
