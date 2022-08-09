@@ -7,6 +7,9 @@ export const selectablesSteps: IStep[] = [
     new SetState()
 ];
 
+/**
+ * The step ID associated to the function that parse the step.
+ */
 export const stepsLoader: { [key: string]: (json: any) => IStep } = {
     [ExternalStep.ID]: ExternalStep.load,
 }
